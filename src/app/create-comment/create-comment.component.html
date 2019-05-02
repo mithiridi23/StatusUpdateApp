@@ -1,0 +1,41 @@
+<div style="padding: 10px 40px" class="row">
+  <div class="col-md-12">
+    <div *ngFor="let cmt of cmtList;let idx = index">
+      <hr style="opacity:0">
+      <div class="nestCmt" style="padding:20px;">
+        <div style="width: 8%" class="col-md-4">
+          <img src="assets/21294.png" height="60" width="60" alt="Image">
+        </div>
+        <div style="padding: 0px 30px" class="col-md-8">
+          <h6><strong>{{cmt.userName}}</strong></h6>
+          <h6>{{cmt.cmtentered}}</h6>
+          <span><img src="assets/up.png" (click)="CountPlusOne(idx)" height="20" width="20"></span>
+          <span><img src="assets/down.png" (click)="CountMinusOne(idx)" height="20" width="20"></span>
+          <span id="cmtId_{{idx}}" [ngClass]="countVote < 0 ? 'red' : countVote > 4 ? 'green' : ''"
+            style="padding:0px 4px">{{countVote}}</span>
+          <span (click)="onReply(f)">Reply</span>
+          <span style="padding-left:10px">Share</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!replyFlag || showReplyMain" class="row">
+  <form id="commentForm" (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="col-md-8">
+      <div class="form-group">
+        <input type="textarea" class="form-control" type="text" placeholder="Write a Reply...." class="form-control"
+          ngModel name="commentBox">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <input class="form-control" type="text" placeholder="username" ngModel name="username">
+      </div>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-success">Reply</button>
+    </div>
+  </form>
+</div>

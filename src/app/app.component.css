@@ -1,0 +1,10 @@
+.link{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4; /* number of lines to show */
+        line-height: X;        /* fallback */
+        max-height: X*4;  
+        word-wrap: break-word;     /* fallback */
+}
