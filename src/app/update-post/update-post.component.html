@@ -16,24 +16,23 @@
   </div>
   <div class="row">
     <div class="row" *ngFor="let cmt of postList;let i= index;">
-      <hr *ngIf="i!==0">
-      <div id="prt" style="padding:20px;" class="col-md-12">
+      <hr id="prtHr" *ngIf="i!==0">
+      <div id="prt_{{i}}" style="padding:20px;" class="col-md-12">
         <div style="width: 8%" class="col-md-4">
           <img src="assets/21294.png" height="60" width="60" alt="Image">
         </div>
         <div class="col-md-8">
           <h5><strong>{{cmt.userName}}</strong></h5>
           <h5>{{cmt.cmtentered}}</h5>
-          <span><img src="assets/up.png" (click)="countPlusOne(i)" height="20" width="20"></span>
-          <span><img src="assets/down.png" (click)="countMinusOne(i)" height="20" width="20"></span>
-          <span [ngClass]="countVote < 0 ? 'red' : countVote > 4 ? 'green' : ''" id="countId_{{i}}"
-            style="padding:0px 4px">{{countVote}}</span>
+          <span><img src="assets/up.png" (click)="countPlusOne(i,'countId_')" height="20" width="20"></span>
+          <span><img src="assets/down.png" (click)="countMinusOne(i,'countId_')" height="20" width="20"></span>
+          <span id="countId_{{i}}" style="padding:0px 4px">0</span>
           <span (click)="onStatusReply($event)">Reply</span>
           <span style="padding-left:10px">Share</span>
         </div>
       </div>
-      <div *ngIf="showCommentflag">
-        <app-create-comment [showReplyMain]="replyFlag"></app-create-comment>
+      <div>
+        <app-commentmodal></app-commentmodal>
       </div>
     </div>
   </div>

@@ -10,6 +10,7 @@ import { CreateCommentComponent } from './create-comment/create-comment.componen
 
 import { UpdatePostComponent } from './update-post/update-post.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommentmodalComponent } from './commentmodal/commentmodal.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeaderComponent,
     CreateCommentComponent,
     UpdatePostComponent,
+    CommentmodalComponent,
   ],
   imports: [
     BrowserModule,

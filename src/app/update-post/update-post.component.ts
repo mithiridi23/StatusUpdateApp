@@ -1,5 +1,8 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { CommentmodalComponent } from '../commentmodal/commentmodal.component';
+
+import { CommonService } from '../common.service';
 
 @Component({
   selector: 'app-update-post',
@@ -14,13 +17,13 @@ export class UpdatePostComponent implements OnInit {
   private countVote: any = 0;
   public replyFlag: boolean;
 
-  ngOnInit() {
 
+  @ViewChild(CommentmodalComponent)
+  private commentModalComponent: CommentmodalComponent;
+  ngOnInit() {
   }
 
-  constructor(
-    private elementRef: ElementRef
-  ) { }
+  constructor(private commonService: CommonService) { }
 
   onSubmit(form: NgForm) {
     let formData = {
@@ -33,23 +36,28 @@ export class UpdatePostComponent implements OnInit {
     form.reset();
   }
 
-  onStatusReply(event, form: NgForm, ) {
+  onStatusReply(event, form: NgForm) {
     this.showCommentflag = true;
     this.replyFlag = true;
+    this.commentModalComponent.openModal();
   }
 
   showChildMsg() {
     return true;
   }
 
-  countPlusOne(idx) {
-
-    this.countVote = Number(document.getElementById("countId_" + idx).innerText) + 1;
-    //this.countVote = this.countVote + 1;
+  countPlusOne(idx, id) {
+    this.commonService.incrementLike(idx, id);
   }
 
-  countMinusOne(idx) {
-    this.countVote = Number(document.getElementById("countId_" + idx).innerText) - 1
+  countMinusOne(idx, id) {
+    this.commonService.dislike(idx, id);
   }
+
+  open(content) {
+    // this.commentModalComponent.open(content);
+  }
+
+
 
 }

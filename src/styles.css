@@ -21,3 +21,18 @@ textarea.form-control.ng-touched.ng-invalid {
 .form-control{
     border-radius: 1rem;
 }
+
+
+.backblur{ 
+    background-color:rgba(0,0,0,0.6);
+    position:fixed;
+    top:0;    
+    left:0;
+    width:100%;  
+    height:100vh;
+}
+
+
+    hr#prtHr {
+        border: 1px solid grey;
+    }
