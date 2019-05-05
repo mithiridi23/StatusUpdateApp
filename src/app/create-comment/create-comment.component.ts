@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { CommonService } from '../common.service'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
@@ -9,20 +10,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 })
 export class CreateCommentComponent implements OnInit {
 
+
   cmtList: Array<any> = [];
-  replyFlag: Boolean = false;
-  flag: boolean;
   isPostStatus: boolean;
-  countVote: any = 0;
   @Input() showReplyMain: boolean;
+  @Input() prtIndex: any;
 
-  constructor() { }
-
+  constructor(private commonService: CommonService) { }
   ngOnInit() {
-    this.replyFlag = false;
+    console.log(this.prtIndex)
   }
-
-
   onSubmit(form: NgForm) {
     let formData = {
       userName: form.value.username,
@@ -31,23 +28,21 @@ export class CreateCommentComponent implements OnInit {
     }
 
     this.cmtList.push(formData);
-    this.replyFlag = true;
     form.reset();
+    this.onCloseHandled();
+    this.showReplyMain = false;
   }
 
-
-  onReply(form: NgForm) {
-    this.replyFlag = false;
+  countPlusOne(idx, id) {
+    this.commonService.incrementLike(idx, id);
   }
 
-
-  CountPlusOne(idx) {
-    this.countVote = Number(document.getElementById("cmtId_" + idx).innerText) + 1;
-
+  countMinusOne(idx, id) {
+    this.commonService.dislike(idx, id);
   }
 
-  CountMinusOne(idx) {
-    this.countVote = Number(document.getElementById("cmtId_" + idx).innerText) - 1
+  onCloseHandled() {
+    this.showReplyMain = false;
   }
 
 }

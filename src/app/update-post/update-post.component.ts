@@ -3,23 +3,25 @@ import { NgForm } from '@angular/forms';
 import { CommentmodalComponent } from '../commentmodal/commentmodal.component';
 
 import { CommonService } from '../common.service';
+import { ChangeDetectionStrategy } from '@angular/core'
+import { CreateCommentComponent } from '../create-comment/create-comment.component';
 
 @Component({
   selector: 'app-update-post',
   templateUrl: './update-post.component.html',
-  styleUrls: ['./update-post.component.css']
+  styleUrls: ['./update-post.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UpdatePostComponent implements OnInit {
 
-  private postList: Array<any> = [];
+  private postList: any = [];
   public cmtentered: Object;
   public showCommentflag: boolean;
-  private countVote: any = 0;
   public replyFlag: boolean;
 
 
-  @ViewChild(CommentmodalComponent)
-  private commentModalComponent: CommentmodalComponent;
+  @ViewChild(CreateCommentComponent)
+  private commentModalComponent: CreateCommentComponent;
   ngOnInit() {
   }
 
@@ -30,16 +32,15 @@ export class UpdatePostComponent implements OnInit {
       userName: form.value.username,
       cmtentered: form.value.statusBox,
     }
-
     this.postList.push(formData);
     console.log(this.postList);
+    this.replyFlag = false;
     form.reset();
   }
 
-  onStatusReply(event, form: NgForm) {
+  onStatusReply(event) {
     this.showCommentflag = true;
     this.replyFlag = true;
-    this.commentModalComponent.openModal();
   }
 
   showChildMsg() {
@@ -53,11 +54,6 @@ export class UpdatePostComponent implements OnInit {
   countMinusOne(idx, id) {
     this.commonService.dislike(idx, id);
   }
-
-  open(content) {
-    // this.commentModalComponent.open(content);
-  }
-
 
 
 }

@@ -1,4 +1,24 @@
-<div class="backblur" [ngStyle]="{'display':display}"></div>
+<div style="padding: 10px 0px 0px 40px" class="row" *ngFor="let cmt of cmtList;let idx = index">
+  <div class="col-md-12">
+    <hr style="opacity:0">
+    <div class="nestCmt" style="padding:10px 20px;">
+      <div style="width: 8%" class="col-md-4">
+        <img src="assets/21294.png" height="60" width="60" alt="Image">
+      </div>
+      <div style="padding: 0px 30px" class="col-md-8">
+        <h6><strong>{{cmt.userName}}</strong></h6>
+        <h6>{{cmt.cmtentered}}</h6>
+        <span><img src="assets/up.png" (click)="countPlusOne(idx,'cmtId_')" height="20" width="20"></span>
+        <span><img src="assets/down.png" (click)="countMinusOne(idx,'cmtId_')" height="20" width="20"></span>
+        <span id="cmtId_{{idx}}" style="padding:0px 4px">0</span>
+        <span (click)="openModal()">Reply</span>
+        <span style="padding-left:10px">Share</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -21,28 +41,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div style="padding: 10px 0px 0px 40px" class="row">
-  <div *ngFor="let cmt of cmtList;let idx = index">
-    <div class="col-md-12">
-      <hr style="opacity:0">
-      <div class="nestCmt" style="padding:10px 20px;">
-        <div style="width: 8%" class="col-md-4">
-          <img src="assets/21294.png" height="60" width="60" alt="Image">
-        </div>
-        <div style="padding: 0px 30px" class="col-md-8">
-          <h6><strong>{{cmt.userName}}</strong></h6>
-          <h6>{{cmt.cmtentered}}</h6>
-          <span><img src="assets/up.png" (click)="countPlusOne(idx,'cmtId_')" height="20" width="20"></span>
-          <span><img src="assets/down.png" (click)="countMinusOne(idx,'cmtId_')" height="20" width="20"></span>
-          <span id="cmtId_{{idx}}" style="padding:0px 4px">0</span>
-          <span (click)="openModal(f)">Reply</span>
-          <span style="padding-left:10px">Share</span>
-        </div>
       </div>
     </div>
   </div>

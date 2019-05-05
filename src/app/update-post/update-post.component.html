@@ -17,7 +17,7 @@
   <div class="row">
     <div class="row" *ngFor="let cmt of postList;let i= index;">
       <hr id="prtHr" *ngIf="i!==0">
-      <div id="prt_{{i}}" style="padding:20px;" class="col-md-12">
+      <div id="prt_{{i}}" style="padding:10px 20px;" class="col-md-12">
         <div style="width: 8%" class="col-md-4">
           <img src="assets/21294.png" height="60" width="60" alt="Image">
         </div>
@@ -30,10 +30,10 @@
           <span (click)="onStatusReply($event)">Reply</span>
           <span style="padding-left:10px">Share</span>
         </div>
+        <!-- <app-commentmodal></app-commentmodal> -->
       </div>
-      <div>
-        <app-commentmodal></app-commentmodal>
-      </div>
+      <app-create-comment [showReplyMain]="replyFlag"></app-create-comment>
+
     </div>
   </div>
 </div>
